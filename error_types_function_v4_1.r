@@ -1,9 +1,4 @@
-# очищаем кэш
-# rm(list=ls())
-# # очищаем кэш графиков
-# graphics.off()
-# # Нужно прописать путь до папки где лежит файл с данными
-# setwd("/Users/aleksejgerasimov/R/помощь студентам/Bocharova/error_types")
+
 
 # install.packages('dygraphs')
 library(dygraphs)
@@ -11,11 +6,7 @@ library(lubridate)
 library(ggplot2)
 library(slider)
 library(dplyr)
-# функция работает только если таблицы с одинаковым количеством строк
-# формат данных должен быть таким таблиц, который ты мне прислала
-#  тогда все будет работать
 
-# Есть таблицы с данными полученными с датчиков температуры и влажности. 
 # Задача - Внести в данные флаги/маркеры для возникновения трёх ошибок. 
 
 # Если у 3 значений подряд было превышения, то выдавать ошибку первого типа.
@@ -73,7 +64,6 @@ errors <- function(temperature="D3030.csv",# файл с температурой
     mutate_at(c("temperature", "humidity"), COMMA) %>% 
     mutate_at(c("time_t","time_h"), TIME) %>%
     mutate_at(c("time_t","time_h"), as.POSIXct)
-  ######### Добавляем строчку со временем на компе, если мы хотим узнать
   # пропуск данных в реальном времени при загрузке файла
   SYS_time=data.frame(NA,NA,Sys.time(),Sys.time())
   colnames(SYS_time) <- colnames(data)
